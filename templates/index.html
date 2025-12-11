@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JSON пример</title>
+</head>
+<body>
+<h1>{{ quiz.title }}</h1>
+<p>{{ quiz.age_range }}</p>
+
+{% for section in quiz.sections %}
+    <h2>{{ section.name }}</h2>
+
+    {% for q in section.questions %}
+        <div style="margin-bottom: 12px;">
+            <label><b>{{ q.text }}</b></label><br>
+
+            {% for opt in q.options %}
+                <input type="radio" name="{{ q.id }}" value="{{ opt }}">
+                {{ opt }}
+            {% endfor %}
+        </div>
+    {% endfor %}
+{% endfor %}
+
+<h2>Завршни прашања</h2>
+
+{% for q in quiz.final_questions %}
+    <div>
+        <p><b>{{ q.text }}</b></p>
+        <input type="text">
+        {% for opt in q.options %}
+
+            <input type="radio" name="{{ q.id }}" value="{{ opt }}"> {{ opt }}
+        {% endfor %}
+    </div>
+{% endfor %}
+</body>
+</html>
